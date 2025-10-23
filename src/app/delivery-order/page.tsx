@@ -25,7 +25,10 @@ import {
   Truck,
   CheckCircle2,
   AlertCircle,
-  Loader2
+  Loader2,
+  Wallet,
+  CreditCard,
+  Banknote
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -553,6 +556,51 @@ export default function DeliveryOrderPage() {
             >
               طلب استبدال (exchange)
             </Label>
+          </div>
+
+          {/* Payment Methods */}
+          <div className="bg-gradient-to-br from-[var(--color-beige)] to-[var(--color-cream)] rounded-xl p-6 border-2 border-[var(--color-gold)]/30">
+            <div className="flex items-center gap-2 mb-4">
+              <Wallet className="h-5 w-5 text-[var(--color-gold)]" />
+              <h3 className="text-xl font-bold text-[var(--color-chocolate)]">
+                طرق الدفع المتاحة
+              </h3>
+            </div>
+            
+            <div className="space-y-3">
+              {/* ZainCash */}
+              <div className="flex items-center gap-3 bg-white p-4 rounded-lg shadow-sm">
+                <div className="flex-shrink-0 w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
+                  <CreditCard className="h-5 w-5 text-purple-600" />
+                </div>
+                <div className="flex-1">
+                  <p className="font-semibold text-[var(--color-chocolate)]">زين كاش</p>
+                  <p className="text-sm text-[var(--color-muted-foreground)] font-mono">07714386624</p>
+                </div>
+              </div>
+
+              {/* Super Key */}
+              <div className="flex items-center gap-3 bg-white p-4 rounded-lg shadow-sm">
+                <div className="flex-shrink-0 w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                  <CreditCard className="h-5 w-5 text-blue-600" />
+                </div>
+                <div className="flex-1">
+                  <p className="font-semibold text-[var(--color-chocolate)]">سوبر كي</p>
+                  <p className="text-sm text-[var(--color-muted-foreground)] font-mono">71119382302</p>
+                </div>
+              </div>
+
+              {/* Cash on Delivery */}
+              <div className="flex items-center gap-3 bg-white p-4 rounded-lg shadow-sm">
+                <div className="flex-shrink-0 w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                  <Banknote className="h-5 w-5 text-green-600" />
+                </div>
+                <div className="flex-1">
+                  <p className="font-semibold text-[var(--color-chocolate)]">تسليم كاش عند الاستلام</p>
+                  <p className="text-sm text-[var(--color-muted-foreground)]">الدفع نقداً عند استلام الطلب</p>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Submit Button */}
