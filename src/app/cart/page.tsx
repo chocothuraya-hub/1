@@ -6,7 +6,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/componen
 import { Separator } from '@/components/ui/separator';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Minus, Plus, Trash2, ShoppingBag } from 'lucide-react';
+import { Minus, Plus, Trash2, ShoppingBag, Truck } from 'lucide-react';
 
 export default function CartPage() {
   const { items, updateQuantity, removeFromCart, totalPrice, totalItems, clearCart } = useCart();
@@ -188,11 +188,14 @@ export default function CartPage() {
                 </div>
               </CardContent>
               <CardFooter className="flex flex-col gap-3">
-                <Button 
-                  className="w-full bg-[var(--color-chocolate)] hover:bg-[var(--color-chocolate-dark)] text-white text-lg py-6"
-                >
-                  إتمام الطلب
-                </Button>
+                <Link href="/delivery-order" className="w-full">
+                  <Button 
+                    className="w-full bg-[var(--color-chocolate)] hover:bg-[var(--color-chocolate-dark)] text-white text-lg py-6"
+                  >
+                    <Truck className="ml-2 h-5 w-5" />
+                    طلب توصيل
+                  </Button>
+                </Link>
                 <Link href="/products" className="w-full">
                   <Button variant="outline" className="w-full border-[var(--color-chocolate)] text-[var(--color-chocolate)]">
                     متابعة التسوق

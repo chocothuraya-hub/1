@@ -31,6 +31,7 @@ import {
   Banknote
 } from "lucide-react";
 import { toast } from "sonner";
+import { useCart } from "@/contexts/CartContext";
 
 interface City {
   id: string | number;
@@ -48,6 +49,7 @@ interface PackageSize {
 }
 
 export default function DeliveryOrderPage() {
+  const { items, totalItems, totalPrice } = useCart();
   const [loading, setLoading] = useState(false);
   const [cities, setCities] = useState<City[]>([]);
   const [regions, setRegions] = useState<Region[]>([]);
@@ -76,6 +78,26 @@ export default function DeliveryOrderPage() {
     fetchCities();
     fetchPackageSizes();
   }, []);
+
+  // Auto-fill form from cart data
+  useEffect(() => {
+    if (items.length > 0) {
+      // Generate package type from cart items
+      const packageType = items
+        .map(item => `${item.product.nameAr} (${item.weight})`)
+        .join(", ");
+      
+      // Calculate total quantity
+      const totalQuantity = items.reduce((sum, item) => sum + item.quantity, 0);
+      
+      setFormData(prev => ({
+        ...prev,
+        package_type: packageType,
+        package_count: totalQuantity.toString(),
+        package_price: totalPrice.toString()
+      }));
+    }
+  }, [items, totalPrice]);
 
   const fetchToken = async () => {
     try {
@@ -320,6 +342,23 @@ export default function DeliveryOrderPage() {
           </p>
         </div>
 
+        {/* Cart Info Alert */}
+        {items.length > 0 && (
+          <div className="bg-[var(--color-beige)] border-2 border-[var(--color-gold)]/30 rounded-xl p-4 mb-6">
+            <div className="flex items-start gap-3">
+              <Package className="h-5 w-5 text-[var(--color-gold)] flex-shrink-0 mt-0.5" />
+              <div className="flex-1">
+                <p className="font-semibold text-[var(--color-chocolate)] mb-1">
+                  تم ملء البيانات من السلة تلقائياً
+                </p>
+                <p className="text-sm text-[var(--color-muted-foreground)]">
+                  نوع البضاعة، عدد القطع، والسعر تم تعبئتها من سلة التسوق
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Form */}
         <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-xl p-8 space-y-6">
           {/* Customer Name */}
@@ -449,15 +488,21 @@ export default function DeliveryOrderPage() {
               <Package className="h-4 w-4" />
               نوع البضاعة أو الطرد <span className="text-red-500">*</span>
             </Label>
-            <Input
+            <Textarea
               id="package_type"
               name="package_type"
               value={formData.package_type}
               onChange={handleInputChange}
               placeholder="مثال: أطعمة، ملابس، إلكترونيات..."
               required
-              className="text-lg"
+              rows={3}
+              className="text-lg resize-none"
             />
+            {items.length > 0 && (
+              <p className="text-xs text-[var(--color-muted-foreground)]">
+                ✓ تم الملء تلقائياً من السلة
+              </p>
+            )}
           </div>
 
           {/* Package Count and Price */}
@@ -478,6 +523,11 @@ export default function DeliveryOrderPage() {
                 required
                 className="text-lg"
               />
+              {items.length > 0 && (
+                <p className="text-xs text-[var(--color-muted-foreground)]">
+                  ✓ تم الملء تلقائياً من السلة
+                </p>
+              )}
             </div>
 
             <div className="space-y-2">
@@ -497,6 +547,11 @@ export default function DeliveryOrderPage() {
                 required
                 className="text-lg"
               />
+              {items.length > 0 && (
+                <p className="text-xs text-[var(--color-muted-foreground)]">
+                  ✓ تم الملء تلقائياً من السلة
+                </p>
+              )}
             </div>
           </div>
 
