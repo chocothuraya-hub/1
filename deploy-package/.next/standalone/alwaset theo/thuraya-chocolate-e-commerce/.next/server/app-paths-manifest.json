@@ -1,0 +1,13 @@
+{
+  "/api/delivery/cities/route": "app/api/delivery/cities/route.js",
+  "/api/delivery/package-sizes/route": "app/api/delivery/package-sizes/route.js",
+  "/api/delivery/regions/route": "app/api/delivery/regions/route.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/delivery/create-order/route": "app/api/delivery/create-order/route.js",
+  "/api/delivery/login/route": "app/api/delivery/login/route.js",
+  "/cart/page": "app/cart/page.js",
+  "/contact/page": "app/contact/page.js",
+  "/products/page": "app/products/page.js",
+  "/delivery-order/page": "app/delivery-order/page.js",
+  "/page": "app/page.js"
+}

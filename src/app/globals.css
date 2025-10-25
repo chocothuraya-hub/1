@@ -1,5 +1,15 @@
 /* Updated: 2025-10-23T14:27:43.211Z */
-@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Playfair+Display:wght@400;500;600;700&family=Amiri:wght@400;700&family=Cairo:wght@300;400;600;700;900&family=Markazi+Text:wght@400;500;600;700&family=Scheherazade+New:wght@400;700&family=Aref+Ruqaa:wght@400;700&family=Rakkas&family=Lalezar&family=Reem+Kufi:wght@400;500;600;700&display=swap');
+
+/* MOSTAQBALI Font */
+@font-face {
+  font-family: 'MOSTAQBALI';
+  src: url('https://cdn.jsdelivr.net/gh/mostafa-binesh/mostaqbali-font@main/fonts/MOSTAQBALI-Regular.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/gh/mostafa-binesh/mostaqbali-font@main/fonts/MOSTAQBALI-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -12,6 +22,15 @@
   --font-mono: var(--font-geist-mono);
   --font-arabic: 'Tajawal', sans-serif;
   --font-display: 'Playfair Display', serif;
+  --font-arabic-elegant: 'Amiri', serif;
+  --font-arabic-modern: 'Cairo', sans-serif;
+  --font-arabic-luxury: 'Scheherazade New', serif;
+  --font-arabic-calligraphy: 'Aref Ruqaa', serif;
+  --font-arabic-display: 'Markazi Text', serif;
+  --font-arabic-brand: 'Rakkas', cursive;
+  --font-arabic-bold: 'Lalezar', cursive;
+  --font-arabic-clean: 'Reem Kufi', sans-serif;
+  --font-arabic-mostaqbali: 'MOSTAQBALI', sans-serif;
   --color-chocolate: var(--chocolate);
   --color-chocolate-dark: var(--chocolate-dark);
   --color-beige: var(--beige);
@@ -123,6 +142,125 @@
   
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
+  }
+}
+
+/* Professional Logo Animations */
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(30px);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.95) translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulseSlow {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.05);
+  }
+}
+
+.animate-fade-in-scale {
+  animation: fadeInScale 1.5s ease-out forwards;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
+
+.animate-pulse-slow {
+  animation: pulseSlow 4s ease-in-out infinite;
+}
+
+/* Gradient Radial for Logo Background */
+.bg-gradient-radial {
+  background: radial-gradient(circle, var(--tw-gradient-stops));
+}
+
+/* Logo Integration Styles */
+@layer utilities {
+  .logo-embedded {
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.2)) brightness(1.05) contrast(0.95);
+    mix-blend-mode: soft-light;
+    opacity: 0.75;
+    transition: all 0.5s ease;
+  }
+  
+  .logo-embedded:hover {
+    opacity: 0.9;
+    filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.25)) brightness(1.1) contrast(1);
+  }
+  
+  /* Background Image Blending Utilities */
+  .bg-blend-subtle {
+    filter: blur(4px) brightness(1.05) contrast(0.9);
+    mix-blend-mode: multiply;
+    opacity: 0.12;
+  }
+  
+  .bg-blend-elegant {
+    filter: blur(6px) brightness(0.95) contrast(1.05);
+    mix-blend-mode: soft-light;
+    opacity: 0.15;
+  }
+  
+  .bg-blend-soft {
+    filter: blur(8px) brightness(1.1) contrast(0.85) saturate(0.8);
+    mix-blend-mode: overlay;
+    opacity: 0.08;
+  }
+  
+  /* Smooth Edge Masks */
+  .mask-radial-fade {
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  }
+  
+  .mask-vertical-fade {
+    mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+  }
+  
+  .mask-edges-fade {
+    mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
   }
 }
 

@@ -30,29 +30,26 @@ export default function ContactPage() {
               <div className="space-y-4">
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-[var(--color-beige)] rounded-full flex items-center justify-center flex-shrink-0">
-                    <MapPin className="h-6 w-6 text-[var(--color-chocolate)]" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-[var(--color-chocolate)] mb-1">
-                      الموقع
-                    </h3>
-                    <p className="text-[var(--color-muted-foreground)]">
-                      بغداد، العراق
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-[var(--color-beige)] rounded-full flex items-center justify-center flex-shrink-0">
                     <Phone className="h-6 w-6 text-[var(--color-chocolate)]" />
                   </div>
-                  <div>
-                    <h3 className="font-semibold text-[var(--color-chocolate)] mb-1">
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-[var(--color-chocolate)] mb-2">
                       الهاتف
                     </h3>
-                    <p className="text-[var(--color-muted-foreground)] direction-ltr text-right">
-                      +964 XXX XXX XXXX
-                    </p>
+                    <div className="space-y-1">
+                      <a 
+                        href="tel:07722784933" 
+                        className="block text-[var(--color-muted-foreground)] hover:text-[var(--color-chocolate)] transition-colors direction-ltr text-right font-medium"
+                      >
+                        0772 278 4933
+                      </a>
+                      <a 
+                        href="tel:07714386624" 
+                        className="block text-[var(--color-muted-foreground)] hover:text-[var(--color-chocolate)] transition-colors direction-ltr text-right font-medium"
+                      >
+                        0771 438 6624
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -150,11 +147,8 @@ export default function ContactPage() {
               <h2 className="text-3xl font-bold text-[var(--color-chocolate)] mb-4" style={{ fontFamily: 'var(--font-display)' }}>
                 ثريا Thuraya
               </h2>
-              <p className="text-xl text-[var(--color-gold)] font-semibold mb-2">
-                ذاق بلمس السحر في كل قضمة
-              </p>
-              <p className="text-lg text-[var(--color-muted-foreground)]">
-                Choco Magic in Every Bite
+              <p className="text-xl text-[var(--color-gold)] font-semibold">
+                مذاق يلامس السماء
               </p>
             </CardContent>
           </Card>

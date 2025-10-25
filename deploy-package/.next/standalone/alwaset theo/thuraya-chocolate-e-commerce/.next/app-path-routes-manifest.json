@@ -1,0 +1,13 @@
+{
+  "/api/delivery/cities/route": "/api/delivery/cities",
+  "/api/delivery/package-sizes/route": "/api/delivery/package-sizes",
+  "/api/delivery/regions/route": "/api/delivery/regions",
+  "/_not-found/page": "/_not-found",
+  "/api/delivery/create-order/route": "/api/delivery/create-order",
+  "/api/delivery/login/route": "/api/delivery/login",
+  "/cart/page": "/cart",
+  "/contact/page": "/contact",
+  "/products/page": "/products",
+  "/delivery-order/page": "/delivery-order",
+  "/page": "/"
+}

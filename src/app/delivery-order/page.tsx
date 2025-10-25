@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -178,8 +179,10 @@ export default function DeliveryOrderPage() {
       toast.error('الرجاء إدخال رقم الهاتف');
       return false;
     }
-    if (!formData.customer_mobile.match(/^\+964\d{10}$/)) {
-      toast.error('رقم الهاتف يجب أن يكون بصيغة +964xxxxxxxxxx');
+    // Accept Iraqi phone numbers: 07xxxxxxxxxx (11 digits) or +9647xxxxxxxxxx (14 chars)
+    const phoneRegex = /^(07\d{9}|\+9647\d{9})$/;
+    if (!phoneRegex.test(formData.customer_mobile)) {
+      toast.error('رقم الهاتف يجب أن يكون بصيغة 07xxxxxxxxx (10 أرقام بعد 07) أو +9647xxxxxxxxx');
       return false;
     }
     if (!formData.city_id) {
@@ -216,29 +219,48 @@ export default function DeliveryOrderPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!validateForm()) return;
+    console.log('🚀 Form submitted');
+    console.log('📝 Form data:', formData);
+    
+    if (!validateForm()) {
+      console.log('❌ Validation failed');
+      return;
+    }
+    
     if (!token) {
+      console.log('❌ No token available');
       toast.error('جاري الاتصال بالخادم...');
       return;
     }
 
+    console.log('✅ Validation passed, token available');
     setLoading(true);
 
     try {
+      // Convert phone numbers to +964 format if needed
+      const formatPhone = (phone: string) => {
+        if (!phone) return "";
+        if (phone.startsWith('+964')) return phone;
+        if (phone.startsWith('07')) return '+964' + phone.substring(1);
+        return phone;
+      };
+
       const orderData = {
-        customer_name: formData.customer_name,
-        customer_mobile: formData.customer_mobile,
-        customer_mobile2: formData.customer_mobile2 || "",
+        client_name: formData.customer_name,
+        client_mobile: formatPhone(formData.customer_mobile),
+        client_mobile2: formatPhone(formData.customer_mobile2),
         city_id: formData.city_id,
         region_id: formData.region_id,
-        order_address: formData.order_address,
-        package_type: formData.package_type,
-        package_count: formData.package_count,
-        package_price: formData.package_price,
+        location: formData.order_address,
+        type_name: formData.package_type,
+        items_number: formData.package_count,
+        price: formData.package_price,
         package_size: formData.package_size,
-        notes: formData.notes || "",
-        is_exchange: formData.is_exchange ? "1" : "0"
+        merchant_notes: formData.notes || "",
+        replacement: formData.is_exchange ? "1" : "0"
       };
+
+      console.log('📦 Sending order data:', orderData);
 
       const response = await fetch('/api/delivery/create-order', {
         method: 'POST',
@@ -248,10 +270,16 @@ export default function DeliveryOrderPage() {
         body: JSON.stringify({ token, orderData })
       });
 
+      console.log('📥 Response status:', response.status);
+
       const data = await response.json();
+      console.log('📥 Response data:', data);
 
       if (response.ok) {
-        toast.success('تم إرسال الطلب بنجاح!');
+        console.log('✅ Order created successfully!');
+        toast.success('تم إرسال الطلب بنجاح!', {
+          description: 'تم إرسال طلبك إلى نظام الوسيط'
+        });
         setSuccessData(data);
         
         // Reset form
@@ -270,10 +298,11 @@ export default function DeliveryOrderPage() {
           is_exchange: false
         });
       } else {
+        console.error('❌ Order creation failed:', data);
         toast.error(data.error || 'فشل إرسال الطلب');
       }
     } catch (error) {
-      console.error('Submit error:', error);
+      console.error('💥 Submit error:', error);
       toast.error('حدث خطأ أثناء إرسال الطلب');
     } finally {
       setLoading(false);
@@ -314,12 +343,13 @@ export default function DeliveryOrderPage() {
               </div>
             )}
 
-            <Button
-              onClick={() => setSuccessData(null)}
-              className="bg-[var(--color-chocolate)] hover:bg-[var(--color-chocolate-dark)] text-white"
-            >
-              إرسال طلب جديد
-            </Button>
+            <Link href="/">
+              <Button
+                className="bg-[var(--color-chocolate)] hover:bg-[var(--color-chocolate-dark)] text-white"
+              >
+                العودة للصفحة الرئيسية
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
@@ -391,7 +421,7 @@ export default function DeliveryOrderPage() {
                 type="tel"
                 value={formData.customer_mobile}
                 onChange={handleInputChange}
-                placeholder="+964xxxxxxxxxx"
+                placeholder="07xxxxxxxxx"
                 required
                 className="text-lg"
               />
@@ -408,7 +438,7 @@ export default function DeliveryOrderPage() {
                 type="tel"
                 value={formData.customer_mobile2}
                 onChange={handleInputChange}
-                placeholder="+964xxxxxxxxxx"
+                placeholder="07xxxxxxxxx (اختياري)"
                 className="text-lg"
               />
             </div>

@@ -14,46 +14,68 @@ export default function Home() {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative h-[600px] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-chocolate)]/20 to-transparent" />
+        {/* Background Image - Elegantly Blended */}
+        <div className="absolute inset-0 opacity-15">
+          <Image
+            src="/hero-bg.png"
+            alt="خلفية"
+            fill
+            className="object-cover"
+            style={{
+              filter: 'blur(3px) brightness(1.1) contrast(0.9)',
+              mixBlendMode: 'multiply',
+              maskImage: 'radial-gradient(ellipse at center, black 20%, transparent 80%)',
+              WebkitMaskImage: 'radial-gradient(ellipse at center, black 20%, transparent 80%)'
+            }}
+            priority
+          />
+        </div>
         
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-chocolate)]/15 via-transparent to-[var(--color-beige)]/20" />
+
         <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center space-y-6 max-w-4xl mx-auto">
-            {/* Logo */}
-            <div className="relative w-64 h-64 mx-auto mb-8">
+          <div className="text-center space-y-12 max-w-4xl mx-auto">
+            {/* SVG Logo */}
+            <div 
+              className="relative w-full h-64 md:h-80 mx-auto animate-fade-in-up flex items-center justify-center"
+              style={{
+                animationDelay: '0.8s',
+                opacity: 0,
+                animationFillMode: 'forwards'
+              }}
+            >
               <Image
-                src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/image-1761228272200.png"
-                alt="ثريا Thuraya"
-                fill
-                className="object-contain drop-shadow-2xl"
+                src="/thuraya-logo.svg"
+                alt="ثُريا"
+                width={800}
+                height={320}
+                className="w-full h-full object-contain"
+                style={{
+                  filter: 'drop-shadow(0 8px 24px rgba(93, 58, 26, 0.4)) drop-shadow(0 4px 12px rgba(139, 69, 19, 0.3))',
+                  maxWidth: '800px'
+                }}
                 priority
               />
             </div>
 
-            <h1 className="text-5xl md:text-7xl font-bold text-[var(--color-chocolate)] leading-tight" style={{ fontFamily: 'var(--font-display)' }}>
-              ثريا
-            </h1>
-            
-            <p className="text-2xl md:text-3xl text-[var(--color-gold)] font-semibold">
-              Thuraya
-            </p>
-            
-            <p className="text-xl md:text-2xl text-[var(--color-chocolate)] font-medium">
-              ذاق بلمس السحر في كل قضمة
-            </p>
-            
-            <p className="text-lg text-[var(--color-muted-foreground)]">
-              Choco Magic in Every Bite
-            </p>
-
-            <div className="flex gap-4 justify-center pt-6">
+            <div className="flex gap-4 justify-center pt-4 animate-fade-in-up" style={{ animationDelay: '1.2s', opacity: 0, animationFillMode: 'forwards' }}>
               <Link href="/products">
-                <Button size="lg" className="bg-[var(--color-chocolate)] hover:bg-[var(--color-chocolate-dark)] text-white text-lg px-8">
-                  <Sparkles className="ml-2 h-5 w-5" />
-                  تصفح المنتجات
+                <Button
+                  size="lg"
+                  className="bg-[#5D3A1A] hover:bg-[#3D2612] text-white text-lg px-8 py-6 flex items-center gap-2 shadow-xl border-2 border-[#8B4513] transition-all duration-300 hover:scale-105"
+                  style={{ fontWeight: 600 }}
+                >
+                  <span>تصفح المنتجات</span>
+                  <Sparkles className="h-5 w-5" />
                 </Button>
               </Link>
               <Link href="/contact">
-                <Button size="lg" variant="outline" className="border-[var(--color-chocolate)] text-[var(--color-chocolate)] hover:bg-[var(--color-beige)] text-lg px-8">
+                <Button
+                  size="lg"
+                  className="bg-white hover:bg-[#F5F5DC] text-[#5D3A1A] text-lg px-8 py-6 border-3 border-[#5D3A1A] shadow-xl transition-all duration-300 hover:scale-105"
+                  style={{ fontWeight: 600, borderWidth: '3px' }}
+                >
                   اتصل بنا
                 </Button>
               </Link>

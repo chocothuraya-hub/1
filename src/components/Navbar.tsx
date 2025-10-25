@@ -1,6 +1,7 @@
 "use client";
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { ShoppingCart, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { useCart } from '@/contexts/CartContext';
@@ -14,21 +15,43 @@ export default function Navbar() {
   const navLinks = [
     { href: '/', label: 'الرئيسية', labelEn: 'Home' },
     { href: '/products', label: 'المنتجات', labelEn: 'Products' },
-    { href: '/delivery-order', label: 'طلب توصيل', labelEn: 'Delivery Order' },
     { href: '/contact', label: 'اتصل بنا', labelEn: 'Contact' }
   ];
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-[var(--color-border)] shadow-sm">
-      <div className="container mx-auto px-4">
+    <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-[var(--color-border)] shadow-sm relative overflow-hidden">
+      {/* Subtle Background Pattern */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
+        <Image
+          src="/hero-bg.png"
+          alt=""
+          fill
+          className="object-cover"
+          style={{
+            filter: 'blur(8px) grayscale(30%)',
+            mixBlendMode: 'multiply',
+            transform: 'scale(1.2)'
+          }}
+        />
+      </div>
+      
+      <div className="container mx-auto px-4 relative z-10">
         <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-            <div className="text-2xl font-bold text-[var(--color-chocolate)]" style={{ fontFamily: 'var(--font-display)' }}>
-              ثريا
-            </div>
-            <div className="text-sm text-[var(--color-gold)] font-semibold">
-              Thuraya
+          {/* Logo - Subtle and Integrated */}
+          <Link href="/" className="flex items-center gap-2 hover:opacity-100 transition-all duration-500 group">
+            <div className="relative w-14 h-14 opacity-70 group-hover:opacity-90 transition-all duration-500">
+              <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-gold)]/20 to-[var(--color-chocolate)]/10 rounded-full blur-md group-hover:blur-lg transition-all" />
+              <Image
+                src="/logo.png"
+                alt="شعار"
+                fill
+                className="object-contain relative z-10 filter brightness-110 contrast-95"
+                style={{ 
+                  filter: 'drop-shadow(0 2px 8px rgba(139, 69, 19, 0.15))',
+                  mixBlendMode: 'multiply'
+                }}
+                priority
+              />
             </div>
           </Link>
 
