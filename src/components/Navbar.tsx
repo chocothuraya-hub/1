@@ -15,7 +15,8 @@ export default function Navbar() {
   const navLinks = [
     { href: '/', label: 'الرئيسية', labelEn: 'Home' },
     { href: '/products', label: 'المنتجات', labelEn: 'Products' },
-    { href: '/contact', label: 'اتصل بنا', labelEn: 'Contact' }
+    { href: '/contact', label: 'اتصل بنا', labelEn: 'Contact' },
+    { href: '/admin', label: '⚙️ الإدارة', labelEn: 'Admin', admin: true }
   ];
 
   return (
@@ -61,7 +62,11 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-[var(--color-chocolate)] hover:text-[var(--color-gold)] transition-colors font-medium"
+                className={`transition-colors font-medium ${
+                  link.admin 
+                    ? 'text-[var(--color-gold)] hover:text-[var(--color-chocolate)] font-bold' 
+                    : 'text-[var(--color-chocolate)] hover:text-[var(--color-gold)]'
+                }`}
               >
                 {link.label}
               </Link>
@@ -107,7 +112,11 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-[var(--color-chocolate)] hover:text-[var(--color-gold)] transition-colors font-medium px-4 py-2"
+                  className={`transition-colors font-medium px-4 py-2 ${
+                    link.admin 
+                      ? 'text-[var(--color-gold)] hover:text-[var(--color-chocolate)] font-bold' 
+                      : 'text-[var(--color-chocolate)] hover:text-[var(--color-gold)]'
+                  }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {link.label}
