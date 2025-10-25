@@ -8,9 +8,13 @@ export async function GET() {
   try {
     const allProducts = await db.select().from(products);
     return NextResponse.json(allProducts);
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error fetching products:', error);
-    return NextResponse.json({ error: 'Failed to fetch products' }, { status: 500 });
+    return NextResponse.json({ 
+      error: 'Failed to fetch products',
+      details: error?.message || 'Unknown error',
+      code: error?.code
+    }, { status: 500 });
   }
 }
 
@@ -32,8 +36,13 @@ export async function POST(request: NextRequest) {
     });
 
     return NextResponse.json({ success: true, id: newProduct[0].insertId });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error creating product:', error);
-    return NextResponse.json({ error: 'Failed to create product' }, { status: 500 });
+    return NextResponse.json({ 
+      error: 'Failed to create product',
+      details: error?.message || 'Unknown error',
+      code: error?.code,
+      sqlMessage: error?.sqlMessage
+    }, { status: 500 });
   }
 }
