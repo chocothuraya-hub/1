@@ -1,6 +1,9 @@
 import { createUploadthing, type FileRouter } from "uploadthing/next";
+import { ENV } from "@/lib/env";
 
-const f = createUploadthing();
+const f = createUploadthing({
+  token: ENV.UPLOADTHING_TOKEN,
+});
 
 export const ourFileRouter = {
   productImage: f({ image: { maxFileSize: "4MB", maxFileCount: 1 } })

@@ -30,6 +30,9 @@
 .env.*.local
 .env.hostinger
 
+# Note: src/lib/env.ts contains hardcoded credentials
+# This is intentional for Netlify free tier deployment
+
 # debug
 npm-debug.log*
 yarn-debug.log*
