@@ -4,10 +4,10 @@ import path from "node:path";
 const LOADER = path.resolve(__dirname, 'src/visual-edits/component-tagger-loader.js');
 
 const nextConfig: NextConfig = {
-  // Export as static HTML for shared hosting
-  output: 'export',
+  // Use default output for Netlify (supports API routes)
+  // output: 'export', // Removed for Netlify deployment
   
-  // Disable image optimization for static export
+  // Keep image optimization disabled for compatibility
   images: {
     unoptimized: true,
   },
