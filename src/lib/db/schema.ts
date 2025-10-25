@@ -19,10 +19,10 @@ export const products = mysqlTable('products', {
   price: decimal('price', { precision: 10, scale: 2 }).notNull(),
   image: varchar('image', { length: 500 }),
   categoryId: int('category_id').references(() => categories.id),
-  inStock: boolean('in_stock').default(true),
-  featured: boolean('featured').default(false),
-  createdAt: timestamp('created_at').defaultNow(),
-  updatedAt: timestamp('updated_at').defaultNow().onUpdateNow(),
+  inStock: int('in_stock', { mode: 'boolean' }).default(1),
+  featured: int('featured', { mode: 'boolean' }).default(0),
+  createdAt: timestamp('created_at', { mode: 'string' }).defaultNow(),
+  updatedAt: timestamp('updated_at', { mode: 'string' }).defaultNow().onUpdateNow(),
 });
 
 export type Category = typeof categories.$inferSelect;
